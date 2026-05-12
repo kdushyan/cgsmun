@@ -1324,7 +1324,23 @@
           Register
         </button>
 
-        
+        <!-- Hidden admin panel to set the Google Forms URL -->
+        <div id="admin-panel" style="margin-top:20px;display:none;">
+          <div style="border:1px solid rgba(202,210,197,0.2);border-radius:2px;overflow:hidden;display:flex;gap:0;">
+            <input id="forms-url-input" type="url" placeholder="Paste Google Forms link here…"
+              style="flex:1;background:rgba(202,210,197,0.07);border:none;padding:10px 14px;font-size:12px;color:var(--cream);font-family:'DM Sans',sans-serif;outline:none;" />
+            <button onclick="applyFormsLink()"
+              style="background:var(--sage);border:none;padding:10px 16px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--slate-dark);cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;white-space:nowrap;">
+              Set Link
+            </button>
+          </div>
+          <p style="font-size:10px;color:rgba(202,210,197,0.35);margin-top:8px;letter-spacing:0.1em;">
+            Admin · paste the Google Forms URL and click Set Link
+          </p>
+        </div>
+      </div>
+    </div>
+
 
     <div class="divider"></div>
 
