@@ -516,6 +516,8 @@
 
     .btn-primary:hover {
       background: var(--sage);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(202, 210, 197, 0.3);
     }
 
     .btn-outline-light {
@@ -539,6 +541,7 @@
 
     .btn-outline-light:hover {
       background: rgba(202, 210, 197, 0.1);
+      transform: translateY(-2px);
     }
 
     .event-cta {
@@ -549,7 +552,7 @@
 
     /* ── SECRETARIAT ── */
     .secretariat-section {
-      background: var(--cream);
+      background: var(--slate-dark);
     }
 
     .sec-header {
@@ -616,12 +619,14 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      transition: background 0.2s;
+      transition: all 0.3s ease;
       position: relative;
     }
 
     .sec-card:hover {
       background: var(--cream-dark);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
     }
 
     /* Portrait frame — mid-sized */
@@ -682,9 +687,30 @@
     }
 
 
+
+    .secretariat-section .section-title,
+    .committees-section .section-title {
+      color: var(--cream);
+    }
+
+    .secretariat-section .section-subtitle,
+    .committees-section .section-subtitle {
+      color: rgba(252, 248, 243, 0.7);
+    }
+
+    .secretariat-section .section-label,
+    .committees-section .section-label {
+      color: var(--sage);
+    }
+
+    .secretariat-section .section-label::before,
+    .committees-section .section-label::before {
+      background: rgba(202, 210, 197, 0.3);
+    }
+
     /* ── COMMITTEES ── */
     .committees-section {
-      background: var(--cream-dark);
+      background: var(--slate-dark);
     }
 
     .committee-grid {
@@ -701,13 +727,13 @@
       display: flex;
       flex-direction: column;
       gap: 16px;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: all 0.3s ease;
       cursor: default;
     }
 
     .committee-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(53, 79, 82, 0.08);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
     }
 
     .committee-tag {
@@ -980,7 +1006,7 @@
       cursor: pointer;
       font-family: 'DM Sans', sans-serif;
       font-weight: 500;
-      transition: background 0.2s;
+      transition: all 0.3s ease;
     }
 
     .footer-newsletter-input button:hover {
@@ -1217,9 +1243,9 @@
   <section class="event-section" id="event">
     <div class="event-inner">
       <div>
-        <p class="section-label">Upcoming External Competition</p>
-        <h2 class="section-title">CGS-MUN 2025 — Annual Inter-School Conference</h2>
-        <p class="section-subtitle">
+        <p class="section-label animate-on-scroll">Upcoming External Competition</p>
+        <h2 class="section-title animate-on-scroll">CGS-MUN 2025 — Annual Inter-School Conference</h2>
+        <p class="section-subtitle animate-on-scroll">
           Our flagship external conference brings together delegates from across the region for two days of intensive
           debate, negotiation, and collaborative problem-solving on the world's most urgent issues.
         </p>
@@ -1280,12 +1306,6 @@
           <span class="countdown-closed-text">Closed!!</span>
         </div>
 
-        <!-- CHANGE 3: Admin panel to set Google Forms link -->
-        <p id="reg-link-label"
-          style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(202,210,197,0.5);margin-bottom:24px;">
-          Registration Link
-        </p>
-
         <!-- Registration box: shows placeholder OR "Register here" link -->
         <div id="reg-box"
           style="background:rgba(202,210,197,0.07);border:1px dashed rgba(202,210,197,0.25);padding:20px;border-radius:2px;margin-bottom:24px;">
@@ -1328,10 +1348,10 @@
     <section class="secretariat-section" id="secretariat">
       <div class="sec-header">
         <div>
-          <p class="section-label">Leadership</p>
-          <h2 class="section-title">Our Secretariat</h2>
+          <p class="section-label animate-on-scroll">Leadership</p>
+          <h2 class="section-title animate-on-scroll">Our Secretariat</h2>
         </div>
-        <p class="section-subtitle" style="padding-top:16px;">
+        <p class="section-subtitle animate-on-scroll" style="padding-top:16px;">
           The Secretariat is the administrative and creative backbone of CGS MUN. Each officer brings expertise,
           passion, and an unwavering commitment to elevating the conference experience.
         </p>
@@ -1472,9 +1492,10 @@
 
     <!-- COMMITTEES -->
     <section class="committees-section" id="committees">
-      <p class="section-label">Debate Chambers</p>
-      <h2 class="section-title">Committees</h2>
-      <p class="section-subtitle">Each committee simulates a distinct body of international governance, with its own
+      <p class="section-label animate-on-scroll">Debate Chambers</p>
+      <h2 class="section-title animate-on-scroll">Committees</h2>
+      <p class="section-subtitle animate-on-scroll">Each committee simulates a distinct body of international
+        governance, with its own
         rules, agenda, and purpose — crafted to deliver a rich, educational debate experience.</p>
 
       <div class="committee-grid">
@@ -1514,18 +1535,24 @@
     </section>
 
     <!-- DEVELOPER CREDIT -->
-    <section class="developer-section" style="background: var(--slate-dark); color: var(--cream); text-align: center; padding: 60px 6vw;">
-      <p style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sage); margin-bottom: 16px;">Developer Credit</p>
-      <p style="font-family: 'Lora', serif; font-size: clamp(20px, 2.5vw, 28px); font-weight: 400; line-height: 1.5; color: var(--cream);">
-        This website was developed by <span style="color: var(--sage); font-weight: 600; font-style: italic;">K. Dushyan</span>
+    <section class="developer-section animate-on-scroll"
+      style="background: var(--slate-dark); color: var(--cream); text-align: center; padding: 60px 6vw;">
+      <p
+        style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sage); margin-bottom: 16px;">
+        Developer Credit</p>
+      <p
+        style="font-family: 'Lora', serif; font-size: clamp(20px, 2.5vw, 28px); font-weight: 400; line-height: 1.5; color: var(--cream);">
+        This website was developed by <span style="color: var(--sage); font-weight: 600; font-style: italic;">K.
+          Dushyan</span>
       </p>
     </section>
 
     <!-- QUOTE -->
     <section class="quote-section">
       <blockquote class="blockquote">
-        <span class="quote-mark">"</span>
-        <p class="quote-text">The United Nations is not just a place where nations argue — it is a practice ground for
+        <span class="quote-mark animate-on-scroll">"</span>
+        <p class="quote-text animate-on-scroll">The United Nations is not just a place where nations argue — it is a
+          practice ground for
           the
           empathy, logic, and moral courage that every generation must learn anew.</p>
         <cite class="quote-author">CGS MUN Club · Faculty Advisor</cite>
@@ -1711,7 +1738,7 @@
         });
       }, { threshold: 0.12 });
 
-      document.querySelectorAll('.committee-card, .sec-card, .stat-item').forEach(el => {
+      document.querySelectorAll('.committee-card, .sec-card, .stat-item, .animate-on-scroll').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
         el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
