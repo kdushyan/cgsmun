@@ -477,6 +477,24 @@
       padding-top: 4px;
     }
 
+    /* CLOSED banner */
+    .countdown-closed {
+      display: none;
+      margin-bottom: 36px;
+      padding: 28px 16px;
+      border: 1px solid rgba(202, 210, 197, 0.3);
+      border-radius: 2px;
+    }
+
+    .countdown-closed-text {
+      font-family: 'Lora', serif;
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
     .btn-primary {
       display: inline-flex;
       align-items: center;
@@ -1082,7 +1100,7 @@
       </p>
       <div class="hero-sig fade-up fade-up-4">
         <span class="hero-sig-name">The Secretary-General</span>
-        <span class="hero-sig-title">CGS MUN Club · 2025–26</span>
+        <span class="hero-sig-title">CGS MUN Club · 2026–27</span>
       </div>
     </div>
     <div class="hero-image">
@@ -1141,12 +1159,19 @@
             Register Now ↗
           </a>
           <a href="#committees" class="btn-outline-light">View Committees</a>
+          <!-- CHANGE 2: Brochure button -->
+          <a href="#" class="btn-outline-light" id="brochure-btn" title="Brochure coming soon" onclick="handleBrochureClick(event)">
+            📄 Brochure
+          </a>
         </div>
       </div>
 
       <!-- COUNTDOWN CARD -->
       <div class="countdown-card">
-        <p class="countdown-title">Registration Closes In</p>
+        <!-- CHANGE 1: Title shows "Registration Closed" when expired -->
+        <p class="countdown-title" id="countdown-title">Registration Closes In</p>
+
+        <!-- Live countdown (shown while open) -->
         <div class="countdown-grid" id="countdown">
           <div class="count-unit">
             <span class="count-num" id="cd-days">00</span>
@@ -1165,20 +1190,48 @@
             <span class="count-label">Seconds</span>
           </div>
         </div>
-        <p
-          style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(202,210,197,0.5);margin-bottom:24px;">
+
+        <!-- CLOSED banner (hidden until deadline passes) -->
+        <div class="countdown-closed" id="countdown-closed">
+          <span class="countdown-closed-text">Closed!!</span>
+        </div>
+
+        <!-- CHANGE 3: Admin panel to set Google Forms link -->
+        <p id="reg-link-label" style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(202,210,197,0.5);margin-bottom:24px;">
           Registration Link
         </p>
-        <div
+
+        <!-- Registration box: shows placeholder OR "Register here" link -->
+        <div id="reg-box"
           style="background:rgba(202,210,197,0.07);border:1px dashed rgba(202,210,197,0.25);padding:20px;border-radius:2px;margin-bottom:24px;">
-          <p style="font-size:13px;color:rgba(252,248,243,0.4);font-style:italic;text-align:center;">
+          <p id="reg-placeholder" style="font-size:13px;color:rgba(252,248,243,0.4);font-style:italic;text-align:center;">
             Registration form will be<br>available here soon
           </p>
+          <a id="reg-link" href="#" target="_blank" rel="noopener noreferrer"
+            style="display:none;font-size:18px;font-family:'Lora',serif;font-weight:600;color:#FCF8F3;text-align:center;text-decoration:none;letter-spacing:0.04em;display:none;width:100%;justify-content:center;">
+            Register here ↗
+          </a>
         </div>
-        <button class="btn-outline-light" style="width:100%;justify-content:center;"
-          onclick="alert('Registration is now open! Please proceed.')">
+
+        <button class="btn-outline-light" style="width:100%;justify-content:center;" id="reg-main-btn"
+          onclick="handleRegisterClick()">
           Register
         </button>
+
+        <!-- Hidden admin panel to set the Google Forms URL -->
+        <div id="admin-panel" style="margin-top:20px;display:none;">
+          <div style="border:1px solid rgba(202,210,197,0.2);border-radius:2px;overflow:hidden;display:flex;gap:0;">
+            <input id="forms-url-input" type="url" placeholder="Paste Google Forms link here…"
+              style="flex:1;background:rgba(202,210,197,0.07);border:none;padding:10px 14px;font-size:12px;color:var(--cream);font-family:'DM Sans',sans-serif;outline:none;" />
+            <button onclick="applyFormsLink()"
+              style="background:var(--sage);border:none;padding:10px 16px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--slate-dark);cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;white-space:nowrap;">
+              Set Link
+            </button>
+          </div>
+          <p style="font-size:10px;color:rgba(202,210,197,0.35);margin-top:8px;letter-spacing:0.1em;">
+            Admin · paste the Google Forms URL and click Set Link
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -1233,78 +1286,53 @@
       <div class="committee-card">
         <span class="committee-tag">-</span>
         <h3 class="committee-name">UNHRC</h3>
-        <span class="committee-abbr">AGENDA — XX</span>
+        <span class="committee-abbr">United Nations Human Rights Council</span>
         <p class="committee-desc">
-          XX
+          AGENDA — To be announced
         </p>
         <div class="committee-meta">
           <div class="committee-meta-item">
             <span class="committee-meta-val">60</span>
             <span class="committee-meta-key">Delegates</span>
           </div>
-          <div class="committee-meta-item">
-            <span class="committee-meta-val">XX</span>
-            <span class="committee-meta-key">Level</span>
-          </div>
         </div>
       </div>
       <div class="committee-card">
         <span class="committee-tag">-</span>
         <h3 class="committee-name">UNSC</h3>
-        <span class="committee-abbr">AGENDA — xx</span>
+        <span class="committee-abbr">United Nations Security Council</span>
         <p class="committee-desc">
-          xx
+          AGENDA — To be announced
         </p>
         <div class="committee-meta">
           <div class="committee-meta-item">
             <span class="committee-meta-val">30</span>
             <span class="committee-meta-key">Delegates</span>
           </div>
-          <div class="committee-meta-item">
-            <span class="committee-meta-val">XX</span>
-            <span class="committee-meta-key">Level</span>
-          </div>
         </div>
       </div>
       <div class="committee-card">
         <span class="committee-tag">-</span>
         <h3 class="committee-name">TNLA</h3>
-        <span class="committee-abbr">AGENDA — XXXX</span>
+        <span class="committee-abbr">Tamil Nadu Liberation Army</span>
         <p class="committee-desc">
-          XXXX
+          AGENDA — To be announced
         </p>
         <div class="committee-meta">
           <div class="committee-meta-item">
             <span class="committee-meta-val">40</span>
             <span class="committee-meta-key">Delegates</span>
           </div>
-          <div class="committee-meta-item">
-            <span class="committee-meta-val">XX</span>
-            <span class="committee-meta-key">Level</span>
-          </div>
         </div>
       </div>
       <div class="committee-card">
         <span class="committee-tag"></span>
         <h3 class="committee-name">IPC</h3>
-        <span class="committee-abbr">AGENDA — Photography and Journalism</span>
+        <span class="committee-abbr">International Press Corps</span>
         <p class="committee-desc">
-          XXXX
+          AGENDA — To be announced
         </p>
-        <div class="committee-meta">
-          <div class="committee-meta-item">
-            <span class="committee-meta-val">15</span>
-            <span class="committee-meta-key">Delegates</span>
-          </div>
-          <div class="committee-meta-item">
-            <span class="committee-meta-val">Intermediate</span>
-            <span class="committee-meta-key">Level</span>
-          </div>
-        </div>
       </div>
-    </div>
-    </div>
-    </div>
     </div>
   </section>
 
@@ -1378,18 +1406,22 @@
   </footer>
 
   <script>
-    // Countdown timer — target date: June 6, 2026
-    const targetDate = new Date('2026-06-06T00:00:00');
+    // ── CHANGE 1: Countdown — target date July 15, 2026 ──
+    const targetDate = new Date('2026-07-15T00:00:00');
+    let isClosed = false;
 
     function updateCountdown() {
       const now = new Date();
       const diff = targetDate - now;
 
       if (diff <= 0) {
-        document.getElementById('cd-days').textContent = '00';
-        document.getElementById('cd-hours').textContent = '00';
-        document.getElementById('cd-mins').textContent = '00';
-        document.getElementById('cd-secs').textContent = '00';
+        // Deadline has passed — show CLOSED!!
+        if (!isClosed) {
+          isClosed = true;
+          document.getElementById('countdown').style.display = 'none';
+          document.getElementById('countdown-closed').style.display = 'block';
+          document.getElementById('countdown-title').textContent = 'Registration';
+        }
         return;
       }
 
@@ -1407,7 +1439,69 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // Subtle scroll fade-in for elements below the fold
+    // ── CHANGE 2: Brochure button handler ──
+    // Set BROCHURE_URL to a real URL when your brochure is ready, e.g.:
+    // const BROCHURE_URL = 'https://drive.google.com/file/d/YOUR_ID/view';
+    const BROCHURE_URL = ''; // ← paste brochure link here when ready
+
+    function handleBrochureClick(e) {
+      if (!BROCHURE_URL) {
+        e.preventDefault();
+        alert('Brochure will be available here soon. Stay tuned!');
+      }
+      // If BROCHURE_URL is set the <a href> will work normally
+    }
+
+    // Set href dynamically if URL is available
+    if (BROCHURE_URL) {
+      const btn = document.getElementById('brochure-btn');
+      btn.href = BROCHURE_URL;
+      btn.target = '_blank';
+      btn.rel = 'noopener noreferrer';
+    }
+
+    // ── CHANGE 3: Google Forms registration link ──
+    // Set FORMS_URL to your Google Forms link to activate the "Register here" box.
+    // Leave as '' to keep the "coming soon" placeholder.
+    const FORMS_URL = ''; // ← paste your Google Forms link here
+
+    function applyFormsLink() {
+      const input = document.getElementById('forms-url-input').value.trim();
+      if (!input) return;
+      activateRegistrationLink(input);
+      document.getElementById('admin-panel').style.display = 'none';
+    }
+
+    function activateRegistrationLink(url) {
+      // Hide placeholder, show "Register here" link
+      document.getElementById('reg-placeholder').style.display = 'none';
+      const link = document.getElementById('reg-link');
+      link.href = url;
+      link.style.display = 'flex';
+
+      // Make the register button also go to the form
+      document.getElementById('reg-main-btn').onclick = function () {
+        window.open(url, '_blank', 'noopener,noreferrer');
+      };
+    }
+
+    function handleRegisterClick() {
+      const link = document.getElementById('reg-link');
+      if (link.style.display !== 'none' && link.href && link.href !== '#') {
+        window.open(link.href, '_blank', 'noopener,noreferrer');
+      } else {
+        // Show admin panel so link can be pasted
+        const panel = document.getElementById('admin-panel');
+        panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+      }
+    }
+
+    // Auto-activate if FORMS_URL is already set above
+    if (FORMS_URL) {
+      activateRegistrationLink(FORMS_URL);
+    }
+
+    // ── Scroll fade-in for cards ──
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -1424,7 +1518,6 @@
       observer.observe(el);
     });
   </script>
-
 
 </body>
 
